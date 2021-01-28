@@ -36,4 +36,50 @@
         </div>
         <div id='leaderboard' class="card d-none">
             Leaderboard:
+            <input id="highscoreName" class="form-control" type="text" placeholder="Enter your name." aria-label="default input example">
+            <button onClick = "submit(event)">Submit</button>
             
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        var countdownTimer
+        var countdownValue
+        var questionNum
+        var points = 0
+
+        var questions = [
+            {
+                question: "What is the element used – and hidden – in code that explains things and makes the content more readable?",
+                answers: ["Quotations", "Comparison", "Comments", "Notes"],
+                correct: "Comments"
+            },
+            {
+                question: "In JavaScript, what is a block of code called that is used to perform a specific task?",
+                answers: ["Function", "Variable", "Declaration", "String"],
+                correct: "Function"
+            },
+            {
+                question: "What is a JavaScript element that represents either TRUE or FALSE values?",
+                answers: ["Event", "Condition", "Constant", "Boolean"],
+                correct: "Boolean"
+            },
+            {
+                question: "Inside which HTML element do we put the JavaScript?",
+                answers: ["js","scripting","javascript","script"],
+                correct: "script"
+            },
+            {
+                question: `How do you call a function named "myFunction"?`,
+                answers: ["Call function myFunction()","call myFunction()", "myFunction()"],
+                correct: "myFunction()"
+            },
+            {
+                question: "Which event occurs when the user clicks on an HTML element?",
+                answers: ["onmouseclick","onclick","onchange","onmouseover"],
+                correct: "onclick"
+            }
+                
+        ]
+
