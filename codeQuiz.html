@@ -83,3 +83,80 @@
                 
         ]
 
+
+        function nextQuestion() {
+            var question = questions[questionNum]
+            var questionEl = document.querySelector('#questionBox')
+            questionEl.innerHTML = `
+      <div class="alert alert-warning"><h3>${question.question}</h3>
+      `
+            for (var i = 0; i < question.answers.length; i++) {
+                var answer = question.answers[i]
+                questionEl.innerHTML += `
+      <button onClick="selectAnswer(event,'${answer}')" class="btn btn-secondary btn-block">${answer}</button>
+      `
+            }
+        }
+
+        function selectAnswer(event, answer) {
+            event.preventDefault()
+            console.log(`question answer id: ${answer}`)
+            if (answer === questions[questionNum].correct) {
+                console.log(`good job! correct answer: ${answer}`)
+                points++
+            } else {
+                console.log(`sorry mate, you loose, -10`)
+                timerDecrease(10)
+            }
+            questionNum++
+            if (questionNum < questions.length)
+                nextQuestion()
+            else
+                finish()
+        }
+
+        function timerDecrease(byValue = 1) {
+            countdownValue -= byValue
+            document.querySelector('#countdown').textContent = countdownValue
+            if (countdownValue < 1)
+                finish()
+        }
+
+        function inputPage(page) {
+            // hide all pages
+            document.querySelector('#quizPage').classList.add('d-none')
+            document.querySelector('#leaderboard').classList.add('d-none')
+            // show selected page
+            document.querySelector(`#${page}`).classList.remove('d-none')
+        }
+
+        function finish(event) {
+            if (event) event.preventDefault()
+            console.log(`finished`)
+            clearInterval(countdownTimer)
+            inputPage('leaderboard')
+        }
+
+        function start() {
+            points = 0
+            questionNum = 0
+            countdownValue = 60
+            countdownTimer = setInterval(timerDecrease, 1000)
+            inputPage('quizPage')
+            nextQuestion()
+        }
+        function submit(event){
+            event.preventDefault()
+            var userName = document.querySelector('#highscoreName').value
+         var highscore=document.querySelector("#leaderboard").innerHTML += `<ul><li>
+        ${userName} Points: ${points}</li></ul>
+        `
+        var scoreInfo = JSON.stringify(highscore)
+        var scoreEl= localStorage.setItem("Highscore",scoreInfo)
+         }
+        
+    </script>
+
+</body>
+
+</html>
